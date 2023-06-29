@@ -1,0 +1,178 @@
+<style>
+    body {
+	margin: 0;
+	background: linear-gradient(45deg, #49a09d, #5f2c82);
+	font-family: sans-serif;
+	font-weight: 100;
+}
+#wrapper {
+    font-family: verdana;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(118, 77, 121, 0.4); /* Update the opacity value to 0.6 */
+    font-size: 14px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+h1 {
+        text-align:center;
+        color:rgb(255, 255, 255);
+    }
+p {
+        text-align:center;
+        color:rgb(255, 255, 255);
+    }
+
+    label {
+        display: block;
+        font-size: 24px;
+        padding: 13px 0;
+        color: #fff;
+        text-shadow: 1px 1px 1px #666;
+    }
+
+    input {
+        height: 18px;
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-border-radius: 6px;
+        -khtml-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        -webkit-box-shadow: 0 0 10px #444;
+        -moz-box-shadow: 0 0 10px #444;
+        box-shadow: 0 0 10px #444;
+        border: 1px solid #fff;
+    }
+
+    textarea {
+        height: 150px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px;
+        border: 1px solid #fff;
+        -webkit-border-radius: 6px;
+        -khtml-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        -webkit-box-shadow: 0 0 10px #444;
+        -moz-box-shadow: 0 0 10px #444;
+        box-shadow: 0 0 10px #444;
+    }
+
+    input[type="text"]:hover,
+    textarea:hover {
+        border: 1px solid #fff;
+        -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25) inset, 0 0 5px rgba(255, 255, 255, 0.4);
+        -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25) inset, 0 0 5px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.25) inset, 0 0 5px rgba(255, 255, 255, 0.4);
+    }
+
+    input#submit {
+        text-align: center;
+        color: #fff;
+        height: 50px;
+        padding: 0;
+        text-shadow: 1px 1px 1px #000;
+        font-size: 18px;
+        text-transform: uppercase;
+        margin-top: 50px;
+        border: 1px solid #000;
+        background: #000;
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3b3b3b), color-stop(100%, #000000));
+        background: -webkit-linear-gradient(top, #3b3b3b 0%, #000000 100%);
+        background: -moz-linear-gradient(top, #3b3b3b 0%, #000000 100%);
+        background: -o-linear-gradient(top, #3b3b3b 0%, #000000 100%);
+        background: -ms-linear-gradient(top, #3b3b3b 0%, #000000 100%);
+        background: linear-gradient(top, #3b3b3b 0%, #000000 100%);
+        opacity: 0.5;
+    }
+
+    input#submit:hover {
+        color: #ccc;
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+    label {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: white;
+    }
+
+    div.wrapper {
+        text-align: center;
+    }
+
+    a {
+        display: block;
+        color: blue;
+        text-align: center;
+    }
+</style>
+
+<div class="wrapper">
+    <h1>User Dashboard</h1>
+    <p>Welcome, {{ user.username }}</p>
+    <div style="text-align: center;">
+        <a href="{% url 'myapp:logout' %}" style="color: rgb(188, 188, 246);">Would you like to Logout!</a>
+    </div>
+
+    <form id="wrapper" method="post" action="{% url 'myapp:submit_order' %}">
+        {% csrf_token %}
+
+        <label for="user">Name:</label>
+        <input type="text" value="{{ user.username }}" id="user" name="user" pattern="[A-Za-z0-9]+" required><br>
+
+        <label for="order_date">Order Date:</label>
+        <input type="date" id="order_date" name="order_date" required><br>
+
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" pattern="[A-Za-z0-9]+" required><br>
+
+        <label for="owner_name">Owner Name:</label>
+        <input type="text" id="owner_name" name="owner_name" pattern="[A-Za-z0-9]+" required><br>
+
+        <label for="item">Item:</label>
+        <input type="text" id="item" name="item" required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required><br>
+
+        <label for="weight">Weight:</label>
+        <input type="number" id="weight" name="weight" step="0.01" required><br>
+
+        <label for="shipment_request">Request for Shipment:</label>
+        <input type="text" id="shipment_request" name="shipment_request" required><br>
+
+        <label for="tracking_id">Tracking ID:</label>
+        <input type="text" id="tracking_id" name="tracking_id" required><br>
+
+        <label for="shipment_size">Shipment Size:</label>
+        <label  style="text-align: left">length</label>
+        <input type="number" id="length" name="length" min="1" required>
+        <label  style="text-align: left">breadth</label>
+        <input type="number" id="breadth" name="breadth" min="1" required>
+        <label  style="text-align: left">height</label>
+        <input type="number" id="height" name="height" min="1" required><br>
+
+        <label for="box_count">Box Count:</label>
+        <input type="number" id="box_count" name="box_count" min="1" required><br>
+
+        <label for="specification">Specification:</label>
+        <input type="text" id="specification" name="specification" required><br>
+
+        <label for="quality_checklist">Checklist Quality:</label>
+        <input type="text" id="quality_checklist" name="quality_checklist" required><br>
+
+        <input id="submit" type="submit" value="Submit">
+    </form>
+
+    {% if success_message %}
+        <p>{{ success_message }}</p>
+        <a href="{% url 'myapp:user_dashboard' %}">Go back to User Dashboard</a>
+    {% endif %}
+</div>

@@ -1,0 +1,117 @@
+<h1>Admin Dashboard</h1>
+<p>Welcome, {{ user.username }}</p>
+<div style="text-align: center;">
+    <a href="{% url 'myapp:logout' %}" style="color: rgb(188, 188, 246);">Would you like to Logout!</a>
+</div>
+<style>
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	background: linear-gradient(45deg, #49a09d, #5f2c82);
+	font-family: sans-serif;
+	font-weight: 100;
+}
+
+h1 {
+        text-align:center;
+        color:rgb(255, 255, 255);
+    }
+
+p {
+        text-align:center;
+        color:rgb(255, 255, 255);
+    }
+
+h4 {
+        text-align:center;
+        color:rgb(255, 255, 255);
+    }
+
+.container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+table {
+	width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+th,
+td {
+	padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
+}
+
+th {
+	text-align: left;
+}
+
+thead {
+	th {
+		background-color: #55608f;
+	}
+}
+
+tbody {
+	tr {
+		&:hover {
+			background-color: rgba(255,255,255,0.3);
+		}
+	}
+	td {
+		position: relative;
+		&:hover {
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: -9999px;
+				bottom: -9999px;
+				background-color: rgba(255,255,255,0.2);
+				z-index: -1;
+			}
+		}
+	}
+}
+    </style>
+<body>
+    <div class="container">
+    <table>
+        <h4>Order Summary</h4>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Quantity</th>
+                <th>Weight</th>
+                <th>Box Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.user }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.weight }}</td>
+                <td>{{ order.box_count }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>Total</td>
+                <td>{{ total_quantity }}</td>
+                <td>{{ total_weight }}</td>
+                <td>{{ total_box }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</body>
